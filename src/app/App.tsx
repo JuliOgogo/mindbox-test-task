@@ -41,39 +41,40 @@ function App() {
         dispatch(changeFilterAC('completed'))
     }
 
-    return <Paper style={{width: '300px', padding: '10px 20px 20px 20px', margin: '0 auto'}}>
-        <h1>Todos</h1>
-        <h3>What needs to be done?</h3>
-        <AddItemForm addItem={addTask}/>
-        <div>
-            {
-                filteredTasks.map(t => {
-                    return <Task
-                        key={t.id}
-                        task={t}
-                        changeTaskTitle={() => {
-                        }}
-                        changeTaskStatus={updateStatus}
-                    />
-                })
-            }
-        </div>
-        <div style={{paddingTop: '10px'}}>
-            <Button variant={filter === 'all' ? 'outlined' : 'text'}
-                    onClick={onAllClickHandler}
-                    color={'info'}
-            >All
-            </Button>
-            <Button variant={filter === 'active' ? 'outlined' : 'text'}
-                    onClick={onActiveClickHandler}
-                    color={'primary'}>Active
-            </Button>
-            <Button variant={filter === 'completed' ? 'outlined' : 'text'}
-                    onClick={onCompletedClickHandler}
-                    color={'secondary'}>Completed
-            </Button>
-        </div>
-    </Paper>
+    return <div>
+        <h1 style={{textAlign: 'center'}}>Todos</h1>
+        <Paper style={{width: '300px', padding: '20px', margin: '0 auto'}}>
+            <h3>What needs to be done?</h3>
+            <AddItemForm addItem={addTask}/>
+            <div>
+                {
+                    filteredTasks.map(t => {
+                        return <Task
+                            key={t.id}
+                            task={t}
+                            changeTaskStatus={updateStatus}
+                        />
+                    })
+                }
+            </div>
+            <div style={{paddingTop: '10px'}}>
+                <Button variant={filter === 'all' ? 'outlined' : 'text'}
+                        onClick={onAllClickHandler}
+                        color={'info'}
+                >All
+                </Button>
+                <Button variant={filter === 'active' ? 'outlined' : 'text'}
+                        onClick={onActiveClickHandler}
+                        color={'primary'}>Active
+                </Button>
+                <Button variant={filter === 'completed' ? 'outlined' : 'text'}
+                        onClick={onCompletedClickHandler}
+                        color={'secondary'}>Completed
+                </Button>
+            </div>
+        </Paper>
+    </div>
+
 }
 
 export default App;

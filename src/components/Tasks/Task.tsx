@@ -6,7 +6,7 @@ import {TaskStatuses, TaskType} from './tasks-reducer';
 export type TaskPropsType = {
     task: TaskType
     changeTaskStatus: (id: string, status: TaskStatuses) => void
-    changeTaskTitle: (taskId: string, newTitle: string) => void
+    changeTaskTitle?: (taskId: string, newTitle: string) => void
 }
 
 export const Task = React.memo((props: TaskPropsType) => {
@@ -15,7 +15,7 @@ export const Task = React.memo((props: TaskPropsType) => {
         props.changeTaskStatus(props.task.id, newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New);
     }, [props.changeTaskStatus, props.task.id])
     const onTitleChangeHandler = useCallback((newValue: string) => {
-        props.changeTaskTitle(props.task.id, newValue);
+        props.changeTaskTitle?.(props.task.id, newValue);
     }, [props.changeTaskTitle, props.task.id])
 
     return <div key={props.task.id}
