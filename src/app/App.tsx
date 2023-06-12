@@ -14,6 +14,15 @@ function App() {
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const filter = useSelector<AppRootStateType, AppStateType>(state => state.app)
 
+    let filteredTasks = tasks
+
+    if (filter === 'active') {
+        filteredTasks = tasks.filter(t => t.status === TaskStatuses.New);
+    }
+    if (filter === 'completed') {
+        filteredTasks = tasks.filter(t => t.status === TaskStatuses.Completed);
+    }
+
     const addTask = (title: string) => {
         dispatch(addTaskAC(title))
     }
@@ -38,7 +47,7 @@ function App() {
         <AddItemForm addItem={addTask}/>
         <div>
             {
-                tasks.map(t => {
+                filteredTasks.map(t => {
                     return <Task
                         key={t.id}
                         task={t}
