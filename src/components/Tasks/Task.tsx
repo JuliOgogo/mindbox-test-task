@@ -18,7 +18,11 @@ export const Task = React.memo((props: TaskPropsType) => {
         props.changeTaskTitle(props.task.id, newValue);
     }, [props.changeTaskTitle, props.task.id])
 
-    return <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? 'is-done' : ''}>
+    return <div key={props.task.id}
+                style={props.task.status === TaskStatuses.Completed ? {
+                    textDecoration: 'line-through',
+                    color: 'gray'
+                } : {}}>
         <Checkbox
             checked={props.task.status === TaskStatuses.Completed}
             color='primary'
