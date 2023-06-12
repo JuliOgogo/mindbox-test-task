@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Button} from '@mui/material';
+import {Button, Paper} from '@mui/material';
 import {AddItemForm} from '../components/AddItemForm/AddItemForm';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './store';
@@ -41,7 +41,7 @@ function App() {
         dispatch(changeFilterAC('completed'))
     }
 
-    return <div>
+    return <Paper style={{width: '300px', padding: '10px 20px 20px 20px', margin: '0 auto'}}>
         <h1>Todos</h1>
         <h3>What needs to be done?</h3>
         <AddItemForm addItem={addTask}/>
@@ -73,7 +73,7 @@ function App() {
                     color={'secondary'}>Completed
             </Button>
         </div>
-    </div>
+    </Paper>
 }
 
 export default App;
