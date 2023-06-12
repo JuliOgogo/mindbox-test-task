@@ -1,3 +1,5 @@
+import {v1} from "uuid";
+
 export enum TaskStatuses {
     New,
     InProgress,
@@ -14,7 +16,7 @@ const initialState: TasksStateType = [
 export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case "ADD-TASK":
-            return [{id: '4', title: action.title, status: TaskStatuses.New}, ...state]
+            return [{id: v1(), title: action.title, status: TaskStatuses.New}, ...state]
         case "UPDATE-TASK":
             return [...state]
         case "SET-TASKS":
