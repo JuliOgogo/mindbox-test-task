@@ -4,7 +4,7 @@ import {Button} from "@mui/material";
 import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
-import {addTaskAC, TasksStateType} from "../components/Tasks/tasks-reducer";
+import {addTaskAC, TasksStateType, TaskStatuses, updateTaskStatusAC} from "../components/Tasks/tasks-reducer";
 import {Task} from "../components/Tasks/Task";
 
 function App() {
@@ -15,6 +15,10 @@ function App() {
 
     const addTask = (title: string) => {
         dispatch(addTaskAC(title))
+    }
+
+    const updateStatus = (id: string, status: TaskStatuses) => {
+        dispatch(updateTaskStatusAC(id, status))
     }
 
     const onAllClickHandler = () => {
@@ -40,8 +44,7 @@ function App() {
                         task={t}
                         changeTaskTitle={() => {
                         }}
-                        changeTaskStatus={() => {
-                        }}
+                        changeTaskStatus={updateStatus}
                     />
                 })
             }

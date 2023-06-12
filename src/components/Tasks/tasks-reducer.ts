@@ -17,8 +17,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
     switch (action.type) {
         case "ADD-TASK":
             return [{id: v1(), title: action.title, status: TaskStatuses.New}, ...state]
-        case "UPDATE-TASK":
-            return [...state]
+        case "UPDATE-TASK-STATUS":
+            return state.map(t => t.id === action.taskId ? {...t, status: action.newStatus} : t)
         case "SET-TASKS":
             return [...state]
         default:
@@ -29,8 +29,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
 // actions
 export const addTaskAC = (title: string) =>
     ({type: 'ADD-TASK', title} as const)
-export const updateTaskAC = (taskId: string, newTitle: string) =>
-    ({type: 'UPDATE-TASK', newTitle} as const)
+export const updateTaskStatusAC = (taskId: string, newStatus: TaskStatuses) =>
+    ({type: 'UPDATE-TASK-STATUS', taskId, newStatus} as const)
 export const setTasksAC = (tasks: TaskType[], todolistId: string) =>
     ({type: 'SET-TASKS', tasks, todolistId} as const)
 
@@ -43,5 +43,5 @@ export type TaskType = {
 }
 type ActionsType =
     | ReturnType<typeof addTaskAC>
+    | ReturnType<typeof updateTaskStatusAC>
     | ReturnType<typeof setTasksAC>
-    | ReturnType<typeof updateTaskAC>
