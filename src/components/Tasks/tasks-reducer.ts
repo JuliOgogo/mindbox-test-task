@@ -14,7 +14,7 @@ const initialState: TasksStateType = [
 export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case "ADD-TASK":
-            return [action.task, ...state]
+            return [{id: '4', title: action.title, status: TaskStatuses.New}, ...state]
         case "UPDATE-TASK":
             return [...state]
         case "SET-TASKS":
@@ -25,8 +25,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
 }
 
 // actions
-export const addTaskAC = (task: TaskType) =>
-    ({type: 'ADD-TASK', task} as const)
+export const addTaskAC = (title: string) =>
+    ({type: 'ADD-TASK', title} as const)
 export const updateTaskAC = (taskId: string, newTitle: string) =>
     ({type: 'UPDATE-TASK', newTitle} as const)
 export const setTasksAC = (tasks: TaskType[], todolistId: string) =>
