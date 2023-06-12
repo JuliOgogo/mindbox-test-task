@@ -1,7 +1,7 @@
-import React, {ChangeEvent, useCallback} from "react";
-import {EditableSpan} from "../EditableSpan/EditableSpan";
-import {Checkbox} from "@mui/material";
-import {TaskStatuses, TaskType} from "./tasks-reducer";
+import React, {ChangeEvent, useCallback} from 'react';
+import {EditableSpan} from '../EditableSpan/EditableSpan';
+import {Checkbox} from '@mui/material';
+import {TaskStatuses, TaskType} from './tasks-reducer';
 
 export type TaskPropsType = {
     task: TaskType
@@ -18,10 +18,10 @@ export const Task = React.memo((props: TaskPropsType) => {
         props.changeTaskTitle(props.task.id, newValue);
     }, [props.changeTaskTitle, props.task.id])
 
-    return <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? "is-done" : ""}>
+    return <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? 'is-done' : ''}>
         <Checkbox
             checked={props.task.status === TaskStatuses.Completed}
-            color="primary"
+            color='primary'
             onChange={onChangeHandler}
         />
 

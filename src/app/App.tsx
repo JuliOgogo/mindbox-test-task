@@ -1,17 +1,18 @@
 import React from 'react';
 import './App.css';
-import {Button} from "@mui/material";
-import {AddItemForm} from "../components/AddItemForm/AddItemForm";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./store";
-import {addTaskAC, TasksStateType, TaskStatuses, updateTaskStatusAC} from "../components/Tasks/tasks-reducer";
-import {Task} from "../components/Tasks/Task";
+import {Button} from '@mui/material';
+import {AddItemForm} from '../components/AddItemForm/AddItemForm';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from './store';
+import {addTaskAC, TasksStateType, TaskStatuses, updateTaskStatusAC} from '../components/Tasks/tasks-reducer';
+import {Task} from '../components/Tasks/Task';
+import {AppStateType, changeFilterAC} from './app-reducer';
 
 function App() {
 
     const dispatch = useDispatch()
-    const tasks = useSelector<AppRootStateType, TasksStateType>(store => store.tasks)
-    let filter = 'all'
+    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const filter = useSelector<AppRootStateType, AppStateType>(state => state.app)
 
     const addTask = (title: string) => {
         dispatch(addTaskAC(title))
@@ -22,16 +23,15 @@ function App() {
     }
 
     const onAllClickHandler = () => {
-
+        dispatch(changeFilterAC('all'))
     }
     const onActiveClickHandler = () => {
-
+        dispatch(changeFilterAC('active'))
     }
     const onCompletedClickHandler = () => {
-
+        dispatch(changeFilterAC('completed'))
     }
 
-    // @ts-ignore
     return <div>
         <h1>Todos</h1>
         <h3>What needs to be done?</h3>
